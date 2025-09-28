@@ -1,40 +1,20 @@
-from playwright.sync_api import sync_playwright, expect
+from playwright.sync_api import sync_playwright, expect, Page
 import pytest
 
 
 @pytest.mark.regression
 @pytest.mark.courses
-def test_empty_courses_list():
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False)
-        context = browser.new_context()
-        page = context.new_page()
-
-        page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
-        email_input = page.get_by_test_id('registration-form-email-input').locator('input')
-        username_input = page.get_by_test_id('registration-form-username-input').locator('input')
-        password_input = page.get_by_test_id('registration-form-password-input').locator('input')
-        registration_button = page.get_by_test_id('registration-page-registration-button')
-        email_input.fill('test@gmail.com')
-        username_input.fill('TestTestovich')
-        password_input.fill('g00dPa$$w0rd')
-        registration_button.click()
-        context.storage_state(path="browser-state.json")
-
-    with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False)
-        context = browser.new_context(storage_state="browser-state.json")
-        page = context.new_page()
-        page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
-        courses_text = page.get_by_test_id('courses-list-toolbar-title-text')
-        expect(courses_text).to_be_enabled()
-        expect(courses_text).to_have_text('Courses')
-        no_courses_text = page.get_by_test_id('courses-list-empty-view-title-text')
-        expect(no_courses_text).to_be_enabled()
-        expect(no_courses_text).to_have_text('There is no results')
-        icon = page.get_by_test_id('courses-list-empty-view-icon')
-        expect(icon).to_be_enabled()
-        expect(icon).to_be_visible()
-        long_text = page.get_by_test_id('courses-list-empty-view-description-text')
-        expect(long_text).to_be_enabled()
-        expect(long_text).to_have_text('Results from the load test pipeline will be displayed here')
+def test_empty_courses_list(chromium_page_with_state: Page):
+    chromium_page_with_state.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
+    courses_text = chromium_page_with_state.get_by_test_id('courses-list-toolbar-title-text')
+    expect(courses_text).to_be_enabled()
+    expect(courses_text).to_have_text('Courses')
+    no_courses_text = chromium_page_with_state.get_by_test_id('courses-list-empty-view-title-text')
+    expect(no_courses_text).to_be_enabled()
+    expect(no_courses_text).to_have_text('There is no results')
+    icon = chromium_page_with_state.get_by_test_id('courses-list-empty-view-icon')
+    expect(icon).to_be_enabled()
+    expect(icon).to_be_visible()
+    long_text = chromium_page_with_state.get_by_test_id('courses-list-empty-view-description-text')
+    expect(long_text).to_be_enabled()
+    expect(long_text).to_have_text('Results from the load test pipeline will be displayed here')
