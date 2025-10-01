@@ -6,12 +6,11 @@ import pytest
 
 @pytest.mark.regression
 @pytest.mark.registration
-@pytest.mark.parametrize('email, username, password', [('test@gmail.com', 'testname', 'pasww')])
 def test_successful_registration(
         dashboard_page: DashboardPage, registration_page: RegistrationPage,
         email: str, username: str, password: str):
     registration_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration")
-    registration_page.fill_registration_form(email=email, username=username, password=password)
+    registration_page.fill_registration_form(email='email@gmail.com', username='username', password='password')
     registration_page.click_registration_button()
-    dashboard_page.check_title_text()
+    dashboard_page.check_visible_dashboard_title()
 
