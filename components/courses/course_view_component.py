@@ -1,6 +1,8 @@
 from playwright.sync_api import Page, expect
 from components.base_component import BaseComponent
 from components.courses.course_view_menu_component import CourseViewMenuComponent
+from elements.text import Text
+from elements.image import Image
 
 
 class CourseViewComponent(BaseComponent):
@@ -9,24 +11,24 @@ class CourseViewComponent(BaseComponent):
 
         self.menu = CourseViewMenuComponent(page)
 
-        self.course_title = page.get_by_test_id('course-widget-title-text')
-        self.course_image = page.get_by_test_id('course-preview-image')
-        self.course_max_score_text = page.get_by_test_id('course-max-score-info-row-view-text')
-        self.course_min_score_text = page.get_by_test_id('course-min-score-info-row-view-text')
-        self.course_estimated_time_text = page.get_by_test_id('course-estimated-time-info-row-view-text')
+        self.course_title = Text(page, 'course-widget-title-text', 'Title')
+        self.course_image = Image(page, 'course-preview-image', 'Preview')
+        self.course_max_score_text = Text(page, 'course-max-score-info-row-view-text', 'Max Score')
+        self.course_min_score_text = Text(page, 'course-min-score-info-row-view-text', 'Min Score')
+        self.course_estimated_time_text = Text(
+            page, 'course-estimated-time-info-row-view-text', 'Estimated Time')
 
     def check_visible(self, index: int, title: str, max_score: str, min_score: str, estimated_time: str):
-        expect(self.course_image.nth(index)).to_be_visible()
+        self.course_image.check_visible(nth=index)
 
-        expect(self.course_title.nth(index)).to_be_visible()
-        expect(self.course_title.nth(index)).to_have_text(title)
+        self.course_title.check_visible(nth=index)
+        self.course_title.check_have_text(text=title, nth=index)
 
-        expect(self.course_max_score_text.nth(index)).to_be_visible()
-        expect(self.course_max_score_text.nth(index)).to_have_text(f"Max score: {max_score}")
+        self.course_max_score_text.check_visible(nth=index)
+        self.course_max_score_text.check_have_text(text=f"Max score: {max_score}", nth=index)
 
-        expect(self.course_min_score_text.nth(index)).to_be_visible()
-        expect(self.course_min_score_text.nth(index)).to_have_text(f"Min score: {min_score}")
+        self.course_min_score_text.check_visible(nth=index)
+        self.course_min_score_text.check_have_text(text=f"Min score: {min_score}", nth=index)
 
-        expect(self.course_estimated_time_text.nth(index)).to_be_visible()
-        expect(self.course_estimated_time_text.nth(index)).to_have_text(
-            f"Estimated time: {estimated_time}")
+        self.course_estimated_time_text.check_visible(nth=index)
+        self.course_estimated_time_text.check_have_text(text=f"Estimated time: {estimated_time}", nth=index)
