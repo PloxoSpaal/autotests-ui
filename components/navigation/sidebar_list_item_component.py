@@ -4,6 +4,7 @@ from typing import Pattern
 from elements.icon import Icon
 from elements.text import Text
 from elements.button import Button
+import allure
 
 
 class SidebarListItemComponent(BaseComponent):
@@ -14,6 +15,7 @@ class SidebarListItemComponent(BaseComponent):
         self.icon = Icon(page, f'{identifier}-drawer-list-item-icon', 'Icon')
         self.title = Text(page, f'{identifier}-drawer-list-item-title-text', 'Title')
 
+    @allure.step('Check visible "{title}" sidebar list item')
     def check_visible(self, title: str):
         self.icon.check_visible()
 
