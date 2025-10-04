@@ -1,4 +1,5 @@
-from playwright.sync_api import Page, expect
+import re
+from playwright.sync_api import Page
 from components.base_component import BaseComponent
 from elements.button import Button
 
@@ -16,6 +17,7 @@ class CourseViewMenuComponent(BaseComponent):
 
         self.edit_button.check_visible(nth=index)
         self.edit_button.click(nth=index)
+        self.check_current_url(re.compile('.*/#/courses/.*'))
 
     def click_delete(self, index: int):
         self.menu_button.click(nth=index)
