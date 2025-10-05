@@ -4,7 +4,7 @@ import allure
 
 
 class BasePage:
-    def __init__(self, page: Page): 
+    def __init__(self, page: Page):
         self.page = page
 
     def check_current_url(self, expected_url: Pattern[str]):

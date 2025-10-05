@@ -3,6 +3,7 @@ import allure
 from playwright.sync_api import Page
 from components.base_component import BaseComponent
 from elements.button import Button
+from tools.routes import AppRoute
 
 
 class CourseViewMenuComponent(BaseComponent):
@@ -19,7 +20,7 @@ class CourseViewMenuComponent(BaseComponent):
 
         self.edit_button.check_visible(nth=index)
         self.edit_button.click(nth=index)
-        self.check_current_url(re.compile('.*/#/courses/.*'))
+        self.check_current_url(re.compile(AppRoute.COURSES))
 
     @allure.step('Open course menu at index "{index}" and click delete')
     def click_delete(self, index: int):

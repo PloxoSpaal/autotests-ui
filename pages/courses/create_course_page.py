@@ -1,4 +1,4 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 from components.navigation.navbar_component import NavBarComponent
 from components.courses.create_course_form_component import CreateCourseFormComponent
 from components.courses.create_course_exercise_form_component import CreateCourseExerciseFormComponent
