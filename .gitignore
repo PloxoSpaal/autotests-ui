@@ -1,3 +1,20 @@
 /tracing
 /videos
 /allure-results
+
+# pycharm
+.idea
+
+# python
+.venv
+__pycache__
+
+# allure
+allure-results
+allure-report
+
+# testing artifacts
+*.html
+*.json
+videos
+tracing
