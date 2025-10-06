@@ -4,5 +4,6 @@ from playwright.sync_api import Playwright, Page
 
 pytest_plugins = (
     "fixtures.browsers",
+    "fixtures.allure",
     "fixtures.pages"
 )
