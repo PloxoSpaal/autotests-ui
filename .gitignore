@@ -19,3 +19,4 @@ allure-report
 videos
 tracing
 test.py
+playwright_courses.py
