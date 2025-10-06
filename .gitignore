@@ -18,3 +18,4 @@ allure-report
 *.json
 videos
 tracing
+test.py
