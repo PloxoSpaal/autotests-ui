@@ -1,2 +1,2 @@
 "# autotests-ui" 
-test
+test autotest
