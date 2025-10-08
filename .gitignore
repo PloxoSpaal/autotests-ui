@@ -1,7 +1,3 @@
-/tracing
-/videos
-/allure-results
-
 # pycharm
 .idea
 
@@ -13,12 +9,20 @@ __pycache__
 allure-results
 allure-report
 
-# testing artifacts
+# testing
 *.html
 *.json
 videos
 tracing
-test.py
-playwright_courses.py
-playwright_registration.py
+
+# coverage
+coverage.html
+coverage-results
+coverage-report.json
+coverage-history.json
+
+.DS_Store
+
 playwright_registration_button.py
+playwright_registration.py
+playwright_courses.py
